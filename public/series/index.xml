@@ -5,22 +5,31 @@
     <link>https://blog.xuhui.dev/series/</link>
     <description>Recent content in Series on xuhui</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 03 Oct 2022 20:22:00 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/series/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Oct 2022 23:38:08 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Development Efficiency</title>
-      <link>https://blog.xuhui.dev/series/development-efficiency/</link>
-      <pubDate>Mon, 03 Oct 2022 20:22:00 +0800</pubDate>
+      <title>typescript</title>
+      <link>https://blog.xuhui.dev/series/typescript/</link>
+      <pubDate>Mon, 03 Oct 2022 23:38:08 +0800</pubDate>
       
-      <guid>https://blog.xuhui.dev/series/development-efficiency/</guid>
+      <guid>https://blog.xuhui.dev/series/typescript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vue</title>
       <link>https://blog.xuhui.dev/series/vue/</link>
-      <pubDate>Mon, 03 Oct 2022 15:55:26 +0800</pubDate>
+      <pubDate>Mon, 03 Oct 2022 23:38:08 +0800</pubDate>
       
       <guid>https://blog.xuhui.dev/series/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development Efficiency</title>
+      <link>https://blog.xuhui.dev/series/development-efficiency/</link>
+      <pubDate>Mon, 03 Oct 2022 20:22:00 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/series/development-efficiency/</guid>
       <description></description>
     </item>
     

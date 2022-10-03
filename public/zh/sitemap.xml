@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>https://blog.xuhui.dev/categories/</loc>
-    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,14 +28,24 @@
                 href="https://blog.xuhui.dev/categories/"
                 />
   </url><url>
-    <loc>https://blog.xuhui.dev/series/development-efficiency/</loc>
-    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+    <loc>https://blog.xuhui.dev/categories/front-end/</loc>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.xuhui.dev/en/categories/front-end/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://blog.xuhui.dev/categories/front-end/"
+                />
   </url><url>
-    <loc>https://blog.xuhui.dev/categories/false/</loc>
-    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+    <loc>https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/</loc>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
   </url><url>
     <loc>https://blog.xuhui.dev/posts/</loc>
-    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -48,7 +58,7 @@
                 />
   </url><url>
     <loc>https://blog.xuhui.dev/series/</loc>
-    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -60,8 +70,24 @@
                 href="https://blog.xuhui.dev/series/"
                 />
   </url><url>
+    <loc>https://blog.xuhui.dev/series/typescript/</loc>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/vue/</loc>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.xuhui.dev/en/series/vue/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://blog.xuhui.dev/series/vue/"
+                />
+  </url><url>
     <loc>https://blog.xuhui.dev/</loc>
-    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -73,34 +99,14 @@
                 href="https://blog.xuhui.dev/"
                 />
   </url><url>
-    <loc>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</loc>
+    <loc>https://blog.xuhui.dev/series/development-efficiency/</loc>
     <lastmod>2022-10-03T20:22:00+08:00</lastmod>
   </url><url>
-    <loc>https://blog.xuhui.dev/categories/front-end/</loc>
-    <lastmod>2022-10-03T15:55:26+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.xuhui.dev/en/categories/front-end/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://blog.xuhui.dev/categories/front-end/"
-                />
+    <loc>https://blog.xuhui.dev/categories/false/</loc>
+    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
   </url><url>
-    <loc>https://blog.xuhui.dev/series/vue/</loc>
-    <lastmod>2022-10-03T15:55:26+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.xuhui.dev/en/series/vue/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://blog.xuhui.dev/series/vue/"
-                />
+    <loc>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</loc>
+    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
   </url><url>
     <loc>https://blog.xuhui.dev/posts/vue-functional-component/</loc>
     <lastmod>2022-10-03T15:55:26+08:00</lastmod>

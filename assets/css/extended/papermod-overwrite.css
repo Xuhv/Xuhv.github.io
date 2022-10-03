@@ -1,0 +1,10 @@
+.first-entry {
+  min-height: unset;
+  margin: var(--gap) 0;
+}
+.post-content del {
+  text-decoration-line: line-through;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  background: none;
+}

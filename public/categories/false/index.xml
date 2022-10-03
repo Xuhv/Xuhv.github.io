@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>false on xuhui</title>
+    <link>https://blog.xuhui.dev/categories/false/</link>
+    <description>Recent content in false on xuhui</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 03 Oct 2022 20:22:00 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/false/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>极致的开发效率</title>
+      <link>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</link>
+      <pubDate>Mon, 03 Oct 2022 20:22:00 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</guid>
+      <description>只是瞎扯下我认为的极致开发效率, 能提升效率的前提是前端使用TS, 连TS都没有谈个单效率
+[前端 &amp;amp; 后端] 代码生成, GraphQl和Restful API 能生成的代码尽量让他生成, 谁他妈吃饱了去写那么多代码啊.
+Restful API 后端API编写的时候, Swagger应当注明返回值类型, 使用代码生成工具, 从openapi文档生成出需要到客户端请求代码. 这一条主要方便的是前端, 后端工作量不变(我他妈还真见过swagger没有返回类型的后端, 你会写个几把后端, 至于swagger跟实际对不上的, 我也无fuck说).
+GraphQL 面对各种毫无卵用的查询, 后端和前端都苦不堪言, 那么用GraphQL. 后端定义写好数据源, 后面就可以不用管啦. 前端要啥取啥, GraphQL类型支持大大滴好, 写俩GraphQL文件, 继续生成代码, 谁他妈没事写那么多代码写着玩啊?
+GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便, 用id查询单个对象也用这个, 简单. 而读操作, 特指查一组数据, 各种不胜其烦的查询条件就是从这来的, 用GraphQL.
+当然, 这会产生一个问题, 两种请求混用, 生成的代码中会包含两套类型定义, 不过我觉得问题不大, 可以忽略.
+[前端: Vue] SFC 和 TSX 到了Vue3, TS支持其实已经有很大提升了, 奈何, 模板语法跟TS就是天生不对付, 用着用着你就发现不对劲了. 而TSX呢, 现在Vue3的组件库已经有很多是用TSX写的了, 但到了日常开发, 写业务的时候问题又来了, 几乎所有Vue生态都是围绕SFC来的, 用TSX就放弃了许多, 比如antfu自动引入组件的unplugin插件(当然, 用TSX也必然有收获, 比如clinyong.</description>
+    </item>
+    
+  </channel>
+</rss>

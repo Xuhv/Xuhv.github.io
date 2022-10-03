@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Vue Functional Component | xuhui</title>
+<meta name="keywords" content="">
+<meta name="description" content="在Vue3中, 函数组件得到了史诗级加强, 具体表现有二
+写法简化, 使用便利性大大增强 随处可用的h, 插槽改版, 适用范围更加宽广 因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如naive-ui, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.
+函数组件的应用场景 重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单 插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在naive-ui中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力 对状态组件的强化, setup script一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的TypeScript支持了, 在包含类型的时候volar插件可能会错误解析你的代码, 而#4294这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像defineProps那样从类型声明编译, 你可以直接使用各种复杂类型就像是在一般的TS中那样 使用函数组件的注意事项 虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API 当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT 虽然本文拿naive-ui举例, 但我还是觉得element-plus好用">
+<meta name="author" content="xuhui">
+<link rel="canonical" href="https://blog.xuhui.dev/posts/vue-functional-component/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://blog.xuhui.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://blog.xuhui.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://blog.xuhui.dev/posts/vue-functional-component/">
+<link rel="alternate" hreflang="en" href="https://blog.xuhui.dev/en/posts/vue-functional-component/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Vue Functional Component" />
+<meta property="og:description" content="在Vue3中, 函数组件得到了史诗级加强, 具体表现有二
+写法简化, 使用便利性大大增强 随处可用的h, 插槽改版, 适用范围更加宽广 因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如naive-ui, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.
+函数组件的应用场景 重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单 插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在naive-ui中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力 对状态组件的强化, setup script一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的TypeScript支持了, 在包含类型的时候volar插件可能会错误解析你的代码, 而#4294这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像defineProps那样从类型声明编译, 你可以直接使用各种复杂类型就像是在一般的TS中那样 使用函数组件的注意事项 虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API 当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT 虽然本文拿naive-ui举例, 但我还是觉得element-plus好用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xuhui.dev/posts/vue-functional-component/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-03T15:55:26+08:00" />
+<meta property="article:modified_time" content="2022-10-03T15:55:26+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Vue Functional Component"/>
+<meta name="twitter:description" content="在Vue3中, 函数组件得到了史诗级加强, 具体表现有二
+写法简化, 使用便利性大大增强 随处可用的h, 插槽改版, 适用范围更加宽广 因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如naive-ui, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.
+函数组件的应用场景 重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单 插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在naive-ui中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力 对状态组件的强化, setup script一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的TypeScript支持了, 在包含类型的时候volar插件可能会错误解析你的代码, 而#4294这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像defineProps那样从类型声明编译, 你可以直接使用各种复杂类型就像是在一般的TS中那样 使用函数组件的注意事项 虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API 当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT 虽然本文拿naive-ui举例, 但我还是觉得element-plus好用"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://blog.xuhui.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Vue Functional Component",
+      "item": "https://blog.xuhui.dev/posts/vue-functional-component/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Vue Functional Component",
+  "name": "Vue Functional Component",
+  "description": "在Vue3中, 函数组件得到了史诗级加强, 具体表现有二\n写法简化, 使用便利性大大增强 随处可用的h, 插槽改版, 适用范围更加宽广 因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如naive-ui, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.\n函数组件的应用场景 重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单 插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在naive-ui中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力 对状态组件的强化, setup script一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的TypeScript支持了, 在包含类型的时候volar插件可能会错误解析你的代码, 而#4294这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像defineProps那样从类型声明编译, 你可以直接使用各种复杂类型就像是在一般的TS中那样 使用函数组件的注意事项 虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API 当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT 虽然本文拿naive-ui举例, 但我还是觉得element-plus好用",
+  "keywords": [
+    
+  ],
+  "articleBody": "在Vue3中, 函数组件得到了史诗级加强, 具体表现有二\n写法简化, 使用便利性大大增强 随处可用的h, 插槽改版, 适用范围更加宽广 因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如naive-ui, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.\n函数组件的应用场景 重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单 插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在naive-ui中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力 对状态组件的强化, setup script一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的TypeScript支持了, 在包含类型的时候volar插件可能会错误解析你的代码, 而#4294这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像defineProps那样从类型声明编译, 你可以直接使用各种复杂类型就像是在一般的TS中那样 使用函数组件的注意事项 虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API 当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT 虽然本文拿naive-ui举例, 但我还是觉得element-plus好用\n",
+  "wordCount" : "55",
+  "inLanguage": "zh",
+  "datePublished": "2022-10-03T15:55:26+08:00",
+  "dateModified": "2022-10-03T15:55:26+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "xuhui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://blog.xuhui.dev/posts/vue-functional-component/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "xuhui",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blog.xuhui.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://blog.xuhui.dev/" accesskey="h" title="xuhui (Alt + H)">xuhui</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                    <li>
+                        <a href="https://blog.xuhui.dev/en/" title="English"
+                            aria-label="English">English</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://blog.xuhui.dev/categories" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/series/" title="专栏">
+                    <span>专栏</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/index.xml" title="Rss">
+                    <span>Rss</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/search" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Vue Functional Component
+    </h1>
+    <div class="post-meta"><span title='2022-10-03 15:55:26 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui&nbsp;|&nbsp;语言:
+<ul class="i18n_list">
+    <li>
+        <a href="https://blog.xuhui.dev/en/posts/vue-functional-component/">English</a>
+    </li>
+</ul>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%87%bd%e6%95%b0%e7%bb%84%e4%bb%b6%e7%9a%84%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af" aria-label="函数组件的应用场景">函数组件的应用场景</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8%e5%87%bd%e6%95%b0%e7%bb%84%e4%bb%b6%e7%9a%84%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="使用函数组件的注意事项">使用函数组件的注意事项</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>在Vue3中, 函数组件得到了史诗级加强, 具体表现有二</p>
+<ol>
+<li>写法简化, 使用便利性大大增强</li>
+<li>随处可用的<code>h</code>, 插槽改版, 适用范围更加宽广</li>
+</ol>
+<p>因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如<code>naive-ui</code>, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.</p>
+<h3 id="函数组件的应用场景">函数组件的应用场景<a hidden class="anchor" aria-hidden="true" href="#函数组件的应用场景">#</a></h3>
+<ol>
+<li>重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单</li>
+<li>插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在<a href="https://github.com/tusen-ai/naive-ui/blob/main/src/data-table/src/TableParts/Body.tsx">naive-ui</a>中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力</li>
+<li>对状态组件的强化, <code>setup script</code>一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的<code>TypeScript</code>支持了, 在包含类型的时候<code>volar</code>插件可能会错误解析你的代码, 而<a href="https://github.com/vuejs/core/issues/4294">#4294</a>这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像<code>defineProps</code>那样从类型声明编译, 你可以直接使用各种<a href="https://www.typescriptlang.org/docs/handbook/2/types-from-types.html">复杂类型</a>就像是在一般的TS中那样</li>
+</ol>
+<h3 id="使用函数组件的注意事项">使用函数组件的注意事项<a hidden class="anchor" aria-hidden="true" href="#使用函数组件的注意事项">#</a></h3>
+<ol>
+<li>虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API</li>
+<li>当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT</li>
+</ol>
+<p><em><del>虽然本文拿<code>naive-ui</code>举例, 但我还是觉得<code>element-plus</code>好用</del></em></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://blog.xuhui.dev/posts/ultimate-development-efficiency/">
+    <span class="title">« 上一页</span>
+    <br>
+    <span>极致的开发效率</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://blog.xuhui.dev/">xuhui</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    <span>View<span id="busuanzi_value_site_pv"></span>times</span>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

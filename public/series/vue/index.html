@@ -125,11 +125,6 @@
                 </a>
             </li>
             <li>
-                <a href="https://blog.xuhui.dev/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
                 <a href="https://blog.xuhui.dev/index.xml" title="Rss">
                     <span>Rss</span>
                 </a>
@@ -159,11 +154,30 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>使用路由分割APP
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>我很烦的一件事就是在某些屎山项目里找代码, 即使编辑器的辅助功能已经非常强大多花不了多少时间, 但真遇到了还是本能得厌恶. 典型的有
+无数个路由写尼玛一个文件里
+一个SFC写上两千行
+整个项目都anyscript, 直接把编辑器跳转功能干废
+这里只针对 1. 提出一个我觉得比较合理的写法: “模块化”, 使用路由分割应用逻辑
+所谓&#34;模块化&#34;, 其实就是把路由表按组分拆到页面去, 比如我的应用有如下的大几十个页面
+系统管理-系统设置 系统管理-在线设置 系统管理-组织设置 项目管理-项目 项目管理-人员 ... 那我们就不应当把他们全平铺在router.ts文件中, 而是针对&#34;系统管理&#34;, “项目管理&#34;等模块, 在其目录下新建一个路由表, 这样查看代码的时候也方便知道那个页面是什么玩意儿, 写在哪的. (什么, 你跟我说你相关逻辑散在views, components各个文件夹? mdzz, 这个话题针对就是你们这种人才.) 似乎计算机组成原理课程上, 有个局部性的概念, 这玩意儿也类似的, 可能要常用的代码, 不应该放近点吗?
+这样写还有个好处就是控制编译出的代码文件, 通过这种方式, 我们可以很轻易地通过每个模块的路由表来控制chunk, 需要代码分割, 异步加载这个路由表呗, 如果你的应用权限是按模块来的, 那直接鉴权都一起做了, 都不需要的话那就直接插到router.ts就好了, 某个页面实在大到咬人, 那就在路由表里把这个页面也给异步加载了呗. 至于为啥不全部异步, 嗯, 当然可以, 如果你愿意.</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-04 04:27:23 +0800 CST'>十月 4, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to 使用路由分割APP" href="https://blog.xuhui.dev/posts/use-router-to-split-app/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Overridable Component Like MUI in Vue
     </h2>
   </header>
   <div class="entry-content">
-    <p>在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS拙见熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
+    <p>在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
 本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
 React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API </p>
   </div>

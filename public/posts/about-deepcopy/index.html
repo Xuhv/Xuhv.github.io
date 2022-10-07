@@ -5,13 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Overridable Component Like MUI in Vue | xuhui</title>
+<title>关于深拷贝 | xuhui</title>
 <meta name="keywords" content="">
-<meta name="description" content="在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
-本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
-React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API ">
+<meta name="description" content="原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)
+后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record&lt;string | number | Symbol, any&gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.
+另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.">
 <meta name="author" content="xuhui">
-<link rel="canonical" href="https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/">
+<link rel="canonical" href="https://blog.xuhui.dev/posts/about-deepcopy/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
@@ -22,7 +22,7 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
 <link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh" href="https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/">
+<link rel="alternate" hreflang="zh" href="https://blog.xuhui.dev/posts/about-deepcopy/">
 <noscript>
     <style>
         #theme-toggle,
@@ -59,22 +59,20 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
         }
 
     </style>
-</noscript><meta property="og:title" content="Overridable Component Like MUI in Vue" />
-<meta property="og:description" content="在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
-本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
-React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API " />
+</noscript><meta property="og:title" content="关于深拷贝" />
+<meta property="og:description" content="原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)
+后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record&lt;string | number | Symbol, any&gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.
+另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-10-03T23:38:08+08:00" />
-<meta property="article:modified_time" content="2022-10-03T23:38:08+08:00" />
-
-<meta property="og:see_also" content="https://blog.xuhui.dev/posts/use-router-to-split-app/" /><meta property="og:see_also" content="https://blog.xuhui.dev/posts/vue-functional-component/" />
+<meta property="og:url" content="https://blog.xuhui.dev/posts/about-deepcopy/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-05T00:39:52+08:00" />
+<meta property="article:modified_time" content="2022-10-05T00:39:52+08:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Overridable Component Like MUI in Vue"/>
-<meta name="twitter:description" content="在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
-本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
-React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API "/>
+<meta name="twitter:title" content="关于深拷贝"/>
+<meta name="twitter:description" content="原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)
+后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record&lt;string | number | Symbol, any&gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.
+另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删."/>
 
 
 <script type="application/ld+json">
@@ -91,8 +89,8 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "Overridable Component Like MUI in Vue",
-      "item": "https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/"
+      "name": "关于深拷贝",
+      "item": "https://blog.xuhui.dev/posts/about-deepcopy/"
     }
   ]
 }
@@ -101,24 +99,24 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "Overridable Component Like MUI in Vue",
-  "name": "Overridable Component Like MUI in Vue",
-  "description": "在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.\n本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有\nReact.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API ",
+  "headline": "关于深拷贝",
+  "name": "关于深拷贝",
+  "description": "原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)\n后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record\u0026lt;string | number | Symbol, any\u0026gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.\n另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.",
   "keywords": [
     
   ],
-  "articleBody": "在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.\n本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有\nReact.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API ",
-  "wordCount" : "19",
+  "articleBody": "原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)\n后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.\n另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.\n",
+  "wordCount" : "64",
   "inLanguage": "zh",
-  "datePublished": "2022-10-03T23:38:08+08:00",
-  "dateModified": "2022-10-03T23:38:08+08:00",
+  "datePublished": "2022-10-05T00:39:52+08:00",
+  "dateModified": "2022-10-05T00:39:52+08:00",
   "author":{
     "@type": "Person",
     "name": "xuhui"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/"
+    "@id": "https://blog.xuhui.dev/posts/about-deepcopy/"
   },
   "publisher": {
     "@type": "Organization",
@@ -207,21 +205,16 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/posts/">Posts</a></div>
     <h1 class="post-title">
-      Overridable Component Like MUI in Vue
+      关于深拷贝
     </h1>
-    <div class="post-meta"><span title='2022-10-03 23:38:08 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui
+    <div class="post-meta"><span title='2022-10-05 00:39:52 +0800 CST'>十月 5, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui
 
 </div>
   </header> 
 
-  <div class="post-content"><p>在React的组件库<a href="https://github.com/mui/material-ui/">MUI</a>中, 有一个看上去就叼到爆的功能<code>OverridableComponent</code>, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.</p>
-<script type="application/javascript" src="https://gist.github.com/Xuhv/d2fff66d0bb7f9fb7d1c63e34bafd08b.js"></script>
-
-<p>本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有</p>
-<ol>
-<li><code>React.ElementType</code>这个类型在Vue中没有等价的东西, 我定义的这个<code>ComponentTsx</code>也没考虑其他情况, 就刚好这里能用而已</li>
-<li>从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API</li>
-</ol>
+  <div class="post-content"><p>原来遇到要深拷贝这种操作我一般就<code>JSON.stingify</code>然后<code>JSON.parse</code>了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)</p>
+<p>后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用<code>JSON</code>好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是<code>Record&lt;string | number | Symbol, any&gt;</code>, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有<code>NaN</code>, <code>Infinity</code>, <code>-Infinity</code>也会被序列化成null.</p>
+<p>另外前阵子出了个<code>structuredClone</code>的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个<a href="https://developer.mozilla.org/en-US/docs/Web/API/structuredClone#see_also">see also</a>就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.</p>
 
 
   </div>
@@ -230,15 +223,15 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
     <ul class="post-tags">
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://blog.xuhui.dev/posts/use-router-to-split-app/">
+  <a class="prev" href="https://blog.xuhui.dev/posts/record-rather-than-share/">
     <span class="title">« 上一页</span>
     <br>
-    <span>使用路由分割APP</span>
+    <span>博客: 记录而不是分享</span>
   </a>
-  <a class="next" href="https://blog.xuhui.dev/posts/ultimate-development-efficiency/">
+  <a class="next" href="https://blog.xuhui.dev/posts/use-router-to-split-app/">
     <span class="title">下一页 »</span>
     <br>
-    <span>极致的开发效率</span>
+    <span>使用路由分割APP</span>
   </a>
 </nav>
 

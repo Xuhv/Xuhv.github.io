@@ -9,7 +9,7 @@ series:
   - vue
 ---
 
-在React的组件库[MUI](https://github.com/mui/material-ui/)中, 有一个看上去就叼到爆的功能`OverridableComponent`, 在我初学TS那阵子, 那简直就是神迹, 后来对TS拙见熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
+在React的组件库[MUI](https://github.com/mui/material-ui/)中, 有一个看上去就叼到爆的功能`OverridableComponent`, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
 
 {{< gist Xuhv d2fff66d0bb7f9fb7d1c63e34bafd08b >}}
 

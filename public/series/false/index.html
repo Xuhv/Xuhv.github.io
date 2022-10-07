@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" dir="auto">
+<html lang="zh" dir="auto">
 
 <head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>404 Page not found | xuhui</title>
+<title>false | xuhui</title>
 <meta name="keywords" content="">
 <meta name="description" content="xuhui&#39;s pages: a web developer.">
 <meta name="author" content="xuhui">
-<link rel="canonical" href="https://blog.xuhui.dev/en/404.html">
+<link rel="canonical" href="https://blog.xuhui.dev/series/false/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
@@ -18,6 +18,8 @@
 <link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/series/false/index.xml">
+<link rel="alternate" hreflang="zh" href="https://blog.xuhui.dev/series/false/">
 <noscript>
     <style>
         #theme-toggle,
@@ -54,13 +56,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="404 Page not found" />
+</noscript><meta property="og:title" content="false" />
 <meta property="og:description" content="xuhui&#39;s pages: a web developer." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.xuhui.dev/en/404.html" />
+<meta property="og:url" content="https://blog.xuhui.dev/series/false/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="404 Page not found"/>
+<meta name="twitter:title" content="false"/>
 <meta name="twitter:description" content="xuhui&#39;s pages: a web developer."/>
 
 </head>
@@ -80,7 +82,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://blog.xuhui.dev/en/" accesskey="h" title="xuhui (Alt + H)">xuhui</a>
+            <a href="https://blog.xuhui.dev/" accesskey="h" title="xuhui (Alt + H)">xuhui</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -104,42 +106,68 @@
                 </button>
                 <ul class="lang-switch"><li>|</li>
                     <li>
-                        <a href="https://blog.xuhui.dev/" title="简体中文"
-                            aria-label="简体中文">简体中文</a>
+                        <a href="https://blog.xuhui.dev/en/" title="English"
+                            aria-label="English">English</a>
                     </li>
                 </ul>
             </div>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://blog.xuhui.dev/en/categories" title="Categories">
-                    <span>Categories</span>
+                <a href="https://blog.xuhui.dev/categories" title="分类">
+                    <span>分类</span>
                 </a>
             </li>
             <li>
-                <a href="https://blog.xuhui.dev/en/series/" title="Series">
-                    <span>Series</span>
+                <a href="https://blog.xuhui.dev/series/" title="专栏">
+                    <span>专栏</span>
                 </a>
             </li>
             <li>
-                <a href="https://blog.xuhui.dev/en/index.xml" title="Rss">
+                <a href="https://blog.xuhui.dev/index.xml" title="Rss">
                     <span>Rss</span>
                 </a>
             </li>
             <li>
-                <a href="https://blog.xuhui.dev/en/search" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
+                <a href="https://blog.xuhui.dev/search" title="搜索">
+                    <span>搜索</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main">
-<div class="not-found">404</div>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/series/">Series</a></div>
+  <h1>
+    false
+    <a href="index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>关于深拷贝
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)
+后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record&lt;string | number | Symbol, any&gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.
+另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-05 00:39:52 +0800 CST'>十月 5, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to 关于深拷贝" href="https://blog.xuhui.dev/posts/about-deepcopy/"></a>
+</article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://blog.xuhui.dev/en/">xuhui</a></span>
+    <span>&copy; 2022 <a href="https://blog.xuhui.dev/">xuhui</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

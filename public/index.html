@@ -140,11 +140,6 @@
                 </a>
             </li>
             <li>
-                <a href="https://blog.xuhui.dev/tags/" title="标签">
-                    <span>标签</span>
-                </a>
-            </li>
-            <li>
                 <a href="https://blog.xuhui.dev/index.xml" title="Rss">
                     <span>Rss</span>
                 </a>
@@ -176,11 +171,61 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>博客: 记录而不是分享
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>以前也尝试写过博文, 但总是没几篇就放弃了, 写到最后总是结果往往是不想写了, 写了又没人看那还写啥, 况且也没那么多值得写的东西, 互联网上垃圾以及够多了, 有时候把号都删了…
+知乎上, B站上有许多没有多少阅读/观看的文章视频, 其中许多还质量极高, 相反, 某些个流量极高的文章视频就说是垃圾也不为过, 我不懂为什么会这样, 是叶公好龙的小白和那些没有自己思考判断的人才是流量的主要来源吗? 或许吧, 我看短视频啥的时候也从来不带脑子.
+但这些创作者又为什么坚持呢? 而除了这些较高水平但没有流量的作品, 其实偶尔还能在网上看到一些水平一般内容无趣也没啥流量的作品, 如果不是作品刚发出来或者我偶尔点进谁的主页, 根本就发现不了这些作品这些作者的存在, 这样作者们又是为了什么坚持呢?
+似乎哪个群的网友分享的一个抖音视频点醒了我. 也不记得视频是讲什么的了, 大概率是某个衣着暴露/猎奇的的女的扭来扭去吧, 他们总爱看这些(我不是, 我没有!). 看到最后, 一个很有穿透力的声音配着logo就出来了: 抖音! 嗯, 我记得之前我手机里还有抖音的时候, 好像是&#34;抖音, 记录美好生活&#34;来着.
+是了, 当我这次开始写博文的时候, 我终于想通了, 是记录. 是记录而不是分享, 那些沉没在数据库中的内容或许有很多都是如此, 生活可能并不美好, 就像某些平台上的技术文章其实毫无技术含量. 但对于经历者, 这还是有意义的, 生活需要仪式感, 于是他们记录下生活, 学习需要正反馈, 那么便将其记录下来吧, 或许在别人眼中不值一提, 但也真真切切是自己所经历过的. 随便打开个博文网站, 里面大部分的内容是重复又简单的, 但想起来, 自己也曾学过这些, 但回头看去, 却仿佛自己什么也没留下, 就像我二十年的生活也没留下什么记忆一样, 或许我也该记录一下.
+至于有没有人看? 去他妈的, 一味追求流量的那叫营销号.</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-05 09:50:11 +0800 CST'>十月 5, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to 博客: 记录而不是分享" href="https://blog.xuhui.dev/posts/record-rather-than-share/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>关于深拷贝
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)
+后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record&lt;string | number | Symbol, any&gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.
+另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-05 00:39:52 +0800 CST'>十月 5, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to 关于深拷贝" href="https://blog.xuhui.dev/posts/about-deepcopy/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>使用路由分割APP
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>我很烦的一件事就是在某些屎山项目里找代码, 即使编辑器的辅助功能已经非常强大多花不了多少时间, 但真遇到了还是本能得厌恶. 典型的有
+无数个路由写尼玛一个文件里
+一个SFC写上两千行
+整个项目都anyscript, 直接把编辑器跳转功能干废
+这里只针对 1. 提出一个我觉得比较合理的写法: “模块化”, 使用路由分割应用逻辑
+所谓&#34;模块化&#34;, 其实就是把路由表按组分拆到页面去, 比如我的应用有如下的大几十个页面
+系统管理-系统设置 系统管理-在线设置 系统管理-组织设置 项目管理-项目 项目管理-人员 ... 那我们就不应当把他们全平铺在router.ts文件中, 而是针对&#34;系统管理&#34;, “项目管理&#34;等模块, 在其目录下新建一个路由表, 这样查看代码的时候也方便知道那个页面是什么玩意儿, 写在哪的. (什么, 你跟我说你相关逻辑散在views, components各个文件夹? mdzz, 这个话题针对就是你们这种人才.) 似乎计算机组成原理课程上, 有个局部性的概念, 这玩意儿也类似的, 可能要常用的代码, 不应该放近点吗?
+这样写还有个好处就是控制编译出的代码文件, 通过这种方式, 我们可以很轻易地通过每个模块的路由表来控制chunk, 需要代码分割, 异步加载这个路由表呗, 如果你的应用权限是按模块来的, 那直接鉴权都一起做了, 都不需要的话那就直接插到router.ts就好了, 某个页面实在大到咬人, 那就在路由表里把这个页面也给异步加载了呗. 至于为啥不全部异步, 嗯, 当然可以, 如果你愿意.</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-04 04:27:23 +0800 CST'>十月 4, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to 使用路由分割APP" href="https://blog.xuhui.dev/posts/use-router-to-split-app/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Overridable Component Like MUI in Vue
     </h2>
   </header>
   <div class="entry-content">
-    <p>在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS拙见熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
+    <p>在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
 本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
 React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API </p>
   </div>
@@ -194,7 +239,7 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
     </h2>
   </header>
   <div class="entry-content">
-    <p>只是瞎扯下我认为的极致开发效率, 能提升效率的前提是前端使用TS, 连TS都没有谈个单效率
+    <p>只是瞎扯下我认为的极致开发效率, 能提升效率的前提是前端使用TS, 连TS都没有谈个蛋效率
 [前端 &amp; 后端] 代码生成, GraphQl和Restful API 能生成的代码尽量让他生成, 谁他妈吃饱了去写那么多代码啊.
 Restful API 后端API编写的时候, Swagger应当注明返回值类型, 使用代码生成工具, 从openapi文档生成出需要到客户端请求代码. 这一条主要方便的是前端, 后端工作量不变(我他妈还真见过swagger没有返回类型的后端, 你会写个几把后端, 至于swagger跟实际对不上的, 我也无fuck说).
 GraphQL 面对各种毫无卵用的查询, 后端和前端都苦不堪言, 那么用GraphQL. 后端定义写好数据源, 后面就可以不用管啦. 前端要啥取啥, GraphQL类型支持大大滴好, 写俩GraphQL文件, 继续生成代码, 谁他妈没事写那么多代码写着玩啊?

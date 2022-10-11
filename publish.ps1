@@ -8,5 +8,4 @@ else {
     git add .
     git commit -m $msg
     git push
-    git subtree push --prefix public origin gh-pages
 }

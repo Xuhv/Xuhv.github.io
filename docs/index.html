@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh" dir="auto">
 
-<head><meta charset="utf-8">
+<head>
+	<meta name="generator" content="Hugo 0.104.1" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | xuhui</title>
-<meta name="keywords" content="">
-<meta name="description" content="Posts - xuhui">
+<title>xuhui</title>
+
+<meta name="description" content="xuhui&#39;s pages: a web developer.">
 <meta name="author" content="xuhui">
-<link rel="canonical" href="https://blog.xuhui.dev/posts/">
+<link rel="canonical" href="https://blog.xuhui.dev/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
@@ -18,9 +19,10 @@
 <link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/posts/index.xml">
-<link rel="alternate" hreflang="zh" href="https://blog.xuhui.dev/posts/">
-<link rel="alternate" hreflang="en" href="https://blog.xuhui.dev/en/posts/">
+<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/index.xml">
+<link rel="alternate" type="application/json" href="https://blog.xuhui.dev/index.json">
+<link rel="alternate" hreflang="zh" href="https://blog.xuhui.dev/">
+<link rel="alternate" hreflang="en" href="https://blog.xuhui.dev/en/">
 <noscript>
     <style>
         #theme-toggle,
@@ -57,27 +59,25 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Posts" />
+</noscript><meta property="og:title" content="xuhui" />
 <meta property="og:description" content="xuhui&#39;s pages: a web developer." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.xuhui.dev/posts/" />
+<meta property="og:url" content="https://blog.xuhui.dev/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="xuhui"/>
 <meta name="twitter:description" content="xuhui&#39;s pages: a web developer."/>
-
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://blog.xuhui.dev/posts/"
-    }
+  "@type": "Organization",
+  "name": "xuhui",
+  "url": "https://blog.xuhui.dev/",
+  "description": "xuhui\u0026#39;s pages: a web developer.",
+  "thumbnailUrl": "https://blog.xuhui.dev/favicon.ico",
+  "sameAs": [
+      
   ]
 }
 </script>
@@ -153,19 +153,21 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a></div>
-  <h1>
-    Posts
-    <a href="index.xml" title="RSS" aria-label="RSS">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round" height="23">
-        <path d="M4 11a9 9 0 0 1 9 9" />
-        <path d="M4 4a16 16 0 0 1 16 16" />
-        <circle cx="5" cy="19" r="1" />
-      </svg>
-    </a>
-  </h1>
-</header>
+<article class="first-entry home-info">
+    <header class="entry-header">
+        <h1>生存, 活着 != 生活</h1>
+    </header>
+    <div class="entry-content">
+        <p>&ldquo;不自由，毋宁死&rdquo;</p>
+<p>生活其实没有什么不易, 没人能强迫你.</p>
+
+    </div>
+    <footer class="entry-footer">
+        <div class="social-icons">
+</div>
+
+    </footer>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -225,7 +227,7 @@
   <div class="entry-content">
     <p>在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
 本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
-React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API </p>
+React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API 而且这段代码也就能拿来练练手了, 由于Vue函数组件没状态, 容易搞出性能问题, 状态组件的props需要一个个去定义, 真想实现一个能用的OverridableComponent我还真没办法.</p>
   </div>
   <footer class="entry-footer"><span title='2022-10-03 23:38:08 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
   <a class="entry-link" aria-label="post link to Overridable Component Like MUI in Vue" href="https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/"></a>

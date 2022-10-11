@@ -2,6 +2,7 @@ baseURL: https://blog.xuhui.dev/
 title: xuhui
 theme: PaperMod
 defaultContentLanguage: zh
+publishDir: docs
 
 outputs:
   home:

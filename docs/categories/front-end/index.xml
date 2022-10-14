@@ -5,7 +5,21 @@
     <link>https://blog.xuhui.dev/categories/front-end/</link>
     <description>Recent content in front-end on xuhui</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 05 Oct 2022 00:39:52 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/front-end/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Oct 2022 20:49:00 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/front-end/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Web Component</title>
+      <link>https://blog.xuhui.dev/posts/web-component/</link>
+      <pubDate>Fri, 14 Oct 2022 20:49:00 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/posts/web-component/</guid>
+      <description>琢磨了下Web Component, 感觉就是还不太好用
+跟现有的视图库相比，自定义元素并不方便，一些构建web components的库对其进行了封装，然而封装后的api又对不齐了，到头来还是距离原生开发有距离
+这一点也不知道是该说好还是不好，web component这边对于事件并没有额外的关心，你就按照Web API去做就是了，假如说需要封装一个自己的input，那么在输入的时候就自行dispatchEvent(new InputEvent(&#39;input&#39;, {...}))也就行了，然而问题是，习惯了vue、react的我们怎么可能还这么写，甚至可能都不知道还有这API。。vue的事件似乎更好用一些，react直接传回调更是神之设计。不过问题倒也不大，熟悉下原来不常用的API, 就跟写原生js一样。
+这个应该最容易发现，我们在用现有的视图库时，props管他啥类型，直接塞到模板/JSX上，但在html里，嗯，老实用字符串吧，复杂数据还得用js去设置。
+样式的问题，现在的编辑器，直接在ts/js文件里用字符串写css没提示啊，单独起一个文件吧，还得过一道编译，麻烦。
+编辑器对自定义元素的支持拉胯，虽然几年前vscode就已经支持了custom data，但在我不长的体验时间里失灵有点频繁。</description>
+    </item>
+    
     <item>
       <title>关于深拷贝</title>
       <link>https://blog.xuhui.dev/posts/about-deepcopy/</link>

@@ -16,7 +16,7 @@
                 />
   </url><url>
     <loc>https://blog.xuhui.dev/categories/</loc>
-    <lastmod>2022-10-05T09:50:11+08:00</lastmod>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,11 +28,24 @@
                 href="https://blog.xuhui.dev/categories/"
                 />
   </url><url>
-    <loc>https://blog.xuhui.dev/categories/false/</loc>
-    <lastmod>2022-10-05T09:50:11+08:00</lastmod>
+    <loc>https://blog.xuhui.dev/series/false/</loc>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/categories/front-end/</loc>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://blog.xuhui.dev/en/categories/front-end/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh"
+                href="https://blog.xuhui.dev/categories/front-end/"
+                />
   </url><url>
     <loc>https://blog.xuhui.dev/posts/</loc>
-    <lastmod>2022-10-05T09:50:11+08:00</lastmod>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -45,7 +58,7 @@
                 />
   </url><url>
     <loc>https://blog.xuhui.dev/series/</loc>
-    <lastmod>2022-10-05T09:50:11+08:00</lastmod>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -57,8 +70,11 @@
                 href="https://blog.xuhui.dev/series/"
                 />
   </url><url>
+    <loc>https://blog.xuhui.dev/posts/web-component/</loc>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
+  </url><url>
     <loc>https://blog.xuhui.dev/</loc>
-    <lastmod>2022-10-05T09:50:11+08:00</lastmod>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -70,27 +86,17 @@
                 href="https://blog.xuhui.dev/"
                 />
   </url><url>
+    <loc>https://blog.xuhui.dev/categories/false/</loc>
+    <lastmod>2022-10-13T23:56:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/fucking-javascript/</loc>
+    <lastmod>2022-10-13T23:56:23+08:00</lastmod>
+  </url><url>
     <loc>https://blog.xuhui.dev/posts/record-rather-than-share/</loc>
     <lastmod>2022-10-05T09:50:11+08:00</lastmod>
   </url><url>
     <loc>https://blog.xuhui.dev/series/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</loc>
     <lastmod>2022-10-05T09:50:11+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.xuhui.dev/series/false/</loc>
-    <lastmod>2022-10-05T00:39:52+08:00</lastmod>
-  </url><url>
-    <loc>https://blog.xuhui.dev/categories/front-end/</loc>
-    <lastmod>2022-10-05T00:39:52+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://blog.xuhui.dev/en/categories/front-end/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh"
-                href="https://blog.xuhui.dev/categories/front-end/"
-                />
   </url><url>
     <loc>https://blog.xuhui.dev/posts/about-deepcopy/</loc>
     <lastmod>2022-10-05T00:39:52+08:00</lastmod>

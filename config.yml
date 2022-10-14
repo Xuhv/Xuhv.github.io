@@ -3,6 +3,8 @@ title: xuhui
 theme: PaperMod
 defaultContentLanguage: zh
 publishDir: docs
+staticDir:
+  - static
 
 outputs:
   home:

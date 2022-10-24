@@ -5,11 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>About | xuhui</title>
+<title>Vue Functional Component | xuhui</title>
 <meta name="keywords" content="">
-<meta name="description" content="Emm Emm">
+<meta name="description" content="In Vue3, functional components have been greatly enhanced, and there are two specific performances
+Simplifying the API h available everywhere and slot revision, resulting the wider application Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, naive-ui. You can find a lot of use of functional components from its documentation. Indeed it&rsquo;s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components.">
 <meta name="author" content="xuhui">
-<link rel="canonical" href="https://blog.xuhui.dev/about/">
+<link rel="canonical" href="https://blog.xuhui.dev/archive/vue-functional-component.en/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
     onload="hljs.initHighlightingOnLoad();"></script>
@@ -56,16 +57,19 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="About" />
-<meta property="og:description" content="Emm Emm" />
+</noscript><meta property="og:title" content="Vue Functional Component" />
+<meta property="og:description" content="In Vue3, functional components have been greatly enhanced, and there are two specific performances
+Simplifying the API h available everywhere and slot revision, resulting the wider application Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, naive-ui. You can find a lot of use of functional components from its documentation. Indeed it&rsquo;s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.xuhui.dev/about/" /><meta property="article:section" content="" />
-<meta property="article:published_time" content="2022-10-03T17:49:13+08:00" />
-<meta property="article:modified_time" content="2022-10-03T17:49:13+08:00" />
+<meta property="og:url" content="https://blog.xuhui.dev/archive/vue-functional-component.en/" /><meta property="article:section" content="archive" />
+<meta property="article:published_time" content="2022-10-03T15:55:26+08:00" />
+<meta property="article:modified_time" content="2022-10-03T15:55:26+08:00" />
+<meta property="og:see_also" content="https://blog.xuhui.dev/posts/use-router-to-split-app/" /><meta property="og:see_also" content="https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/" /><meta property="og:see_also" content="https://blog.xuhui.dev/posts/vue-functional-component/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="About"/>
-<meta name="twitter:description" content="Emm Emm"/>
+<meta name="twitter:title" content="Vue Functional Component"/>
+<meta name="twitter:description" content="In Vue3, functional components have been greatly enhanced, and there are two specific performances
+Simplifying the API h available everywhere and slot revision, resulting the wider application Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, naive-ui. You can find a lot of use of functional components from its documentation. Indeed it&rsquo;s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components."/>
 
 
 <script type="application/ld+json">
@@ -76,8 +80,14 @@
     {
       "@type": "ListItem",
       "position":  1 ,
-      "name": "About",
-      "item": "https://blog.xuhui.dev/about/"
+      "name": "Archives",
+      "item": "https://blog.xuhui.dev/archive/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Vue Functional Component",
+      "item": "https://blog.xuhui.dev/archive/vue-functional-component.en/"
     }
   ]
 }
@@ -86,24 +96,24 @@
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "About",
-  "name": "About",
-  "description": "Emm Emm",
+  "headline": "Vue Functional Component",
+  "name": "Vue Functional Component",
+  "description": "In Vue3, functional components have been greatly enhanced, and there are two specific performances\nSimplifying the API h available everywhere and slot revision, resulting the wider application Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, naive-ui. You can find a lot of use of functional components from its documentation. Indeed it\u0026rsquo;s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components.",
   "keywords": [
     
   ],
-  "articleBody": "Emm Emm\n",
-  "wordCount" : "2",
+  "articleBody": "In Vue3, functional components have been greatly enhanced, and there are two specific performances\nSimplifying the API h available everywhere and slot revision, resulting the wider application Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, naive-ui. You can find a lot of use of functional components from its documentation. Indeed it’s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components.\nApplication Scenarios In Vue3, with JSX, the component extraction of repeated fragments will become extremely simple.\nAs of this writing, Vue slots have no good editor support, but by passing slots into props, you will get components with type support. You can see a lot of this in naive-ui. Now, a slot is now an object whose value is a functional component, so there is no difficulty to do that.\nEnhancement of state components. A good part of setup script is that it reduces a lot of template code. If the code is shorter, it will be easier to read and write, but the downside is that it has poor TypeScript support. Sometimes the volar plugin may parse code incorrectly, and this issue #4294’s solution is still far away. In some cases, you can consider using function components to enhance your state components. The props of function components do not need to be compiled like defineProps, so you can use various complex types directly like in normal TS.\nMisunderstandings Although you can wrap the slot of a component in the way of Props, if you are not writing a component library from scratch, but operating on the basis of existing components, this approach may not be a good idea. We should avoid change the original API.\nWhen you use a function component to wrap a state component, you need to pay attention that the interaction of the state component (child component) should avoid the operation of the function component (parent component) props, the function component props update will cause the entire subtree to update, which may cause your components to get stuck.\nAlthough this article takes naive-ui as an example, I still think element-plus is better to use\n",
+  "wordCount" : "366",
   "inLanguage": "zh",
-  "datePublished": "2022-10-03T17:49:13+08:00",
-  "dateModified": "2022-10-03T17:49:13+08:00",
+  "datePublished": "2022-10-03T15:55:26+08:00",
+  "dateModified": "2022-10-03T15:55:26+08:00",
   "author":{
     "@type": "Person",
     "name": "xuhui"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://blog.xuhui.dev/about/"
+    "@id": "https://blog.xuhui.dev/archive/vue-functional-component.en/"
   },
   "publisher": {
     "@type": "Organization",
@@ -184,11 +194,11 @@
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a></div>
+    <div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/archive/">Archives</a></div>
     <h1 class="post-title">
-      About
+      Vue Functional Component
     </h1>
-    <div class="post-meta"><span title='2022-10-03 17:49:13 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui
+    <div class="post-meta"><span title='2022-10-03 15:55:26 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;xuhui
 
 </div>
   </header> <div class="toc">
@@ -199,15 +209,43 @@
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#emm" aria-label="Emm">Emm</a>
+                    <a href="#application-scenarios" aria-label="Application Scenarios">Application Scenarios</a></li>
+                <li>
+                    <a href="#misunderstandings" aria-label="Misunderstandings">Misunderstandings</a>
                 </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><h3 id="emm">Emm<a hidden class="anchor" aria-hidden="true" href="#emm">#</a></h3>
-<p>Emm</p>
+  <div class="post-content"><p>In Vue3, functional components have been greatly enhanced, and there are two specific performances</p>
+<ol>
+<li>Simplifying the API</li>
+<li><code>h</code> available everywhere and slot revision, resulting the wider application</li>
+</ol>
+<p>Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, <code>naive-ui</code>. You can find a lot of use of functional components from its documentation. Indeed it&rsquo;s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components.</p>
+<h3 id="application-scenarios">Application Scenarios<a hidden class="anchor" aria-hidden="true" href="#application-scenarios">#</a></h3>
+<ol>
+<li>
+<p>In Vue3, with JSX, the component extraction of repeated fragments will become extremely simple.</p>
+</li>
+<li>
+<p>As of this writing, Vue slots have no good editor support, but by passing slots into props, you will get components with type support. You can see a lot of this in <a href="https://github.com/tusen-ai/naive-ui/blob/main/src/data-table/src/TableParts/Body.tsx">naive-ui</a>. Now, a slot is now an object whose value is a functional component, so there is no difficulty to do that.</p>
+</li>
+<li>
+<p>Enhancement of state components. A good part of <code>setup script</code> is that it reduces a lot of template code. If the code is shorter, it will be easier to read and write, but the downside is that it has poor TypeScript support. Sometimes the <code>volar</code> plugin may parse code incorrectly, and this issue <a href="https://github.com/vuejs/core/issues/4294">#4294</a>&rsquo;s solution is still far away. In some cases, you can consider using function components to enhance your state components. The props of function components do not need to be compiled like <code>defineProps</code>, so you can use various <a href="https://www.typescriptlang.org/docs/handbook/2/types-from-types.html">complex types</a> directly like in normal TS.</p>
+</li>
+</ol>
+<h3 id="misunderstandings">Misunderstandings<a hidden class="anchor" aria-hidden="true" href="#misunderstandings">#</a></h3>
+<ol>
+<li>
+<p>Although you can wrap the slot of a component in the way of Props, if you are not writing a component library from scratch, but operating on the basis of existing components, this approach may not be a good idea. We should avoid change the original API.</p>
+</li>
+<li>
+<p>When you use a function component to wrap a state component, you need to pay attention that the interaction of the state component (child component) should avoid the operation of the function component (parent component) props, the function component props update will cause the entire subtree to update, which may cause your components to get stuck.</p>
+</li>
+</ol>
+<p><em><del>Although this article takes <code>naive-ui</code> as an example, I still think <code>element-plus</code> is better to use</del></em></p>
 
 
   </div>

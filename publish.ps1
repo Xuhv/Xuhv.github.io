@@ -7,5 +7,5 @@ else {
     hugo -D
     git add .
     git commit -m $msg
-    git push
+    proxychains4 git push
 }

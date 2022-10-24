@@ -1,18 +1,83 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <sitemap>
-    <loc>https://blog.xuhui.dev/zh/sitemap.xml</loc>
-    
-      <lastmod>2022-10-14T20:49:00+08:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>https://blog.xuhui.dev/en/sitemap.xml</loc>
-    
-      <lastmod>2022-10-03T15:55:26+08:00</lastmod>
-    
-  </sitemap>
-  
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://blog.xuhui.dev/about.en/</loc>
+    <lastmod>2022-10-03T17:49:13+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/about/</loc>
+    <lastmod>2022-10-03T17:49:13+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/categories/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/categories/false/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/after-unemployment/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</loc>
+    <lastmod>2022-10-24T22:11:32+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/false/</loc>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/categories/front-end/</loc>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/web-component/</loc>
+    <lastmod>2022-10-14T20:49:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/fucking-javascript/</loc>
+    <lastmod>2022-10-13T23:56:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/record-rather-than-share/</loc>
+    <lastmod>2022-10-05T09:50:11+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/about-deepcopy/</loc>
+    <lastmod>2022-10-05T00:39:52+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/vue/</loc>
+    <lastmod>2022-10-04T04:27:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/use-router-to-split-app/</loc>
+    <lastmod>2022-10-04T04:27:23+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/</loc>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/typescript/</loc>
+    <lastmod>2022-10-03T23:38:08+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/series/development-efficiency/</loc>
+    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</loc>
+    <lastmod>2022-10-03T20:22:00+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/archive/</loc>
+    <lastmod>2022-10-03T15:55:26+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/archive/vue-functional-component.en/</loc>
+    <lastmod>2022-10-03T15:55:26+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/posts/vue-functional-component/</loc>
+    <lastmod>2022-10-03T15:55:26+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.xuhui.dev/search.en/</loc>
+  </url><url>
+    <loc>https://blog.xuhui.dev/tags/</loc>
+  </url><url>
+    <loc>https://blog.xuhui.dev/search/</loc>
+  </url>
+</urlset>

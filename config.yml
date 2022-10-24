@@ -36,30 +36,27 @@ languages:
     homeInfoParams:
       Title: "生存, 活着 != 生活"
       Content: >
-        "不自由，毋宁死"
-
-
         生活其实没有什么不易, 没人能强迫你.
 
-  en:
-    languageName: "English"
-    weight: 2
-    menu:
-      main:
-        - name: Categories
-          url: categories
-          weight: 5
-        - name: Series
-          url: series/
-          weight: 10
-        - name: Search
-          url: search
-        - name: Rss
-          url: index.xml
-    homeInfoParams:
-      Title: "Ok."
-      Content: >
-        Give me liberty or give me death.
+  # en:
+  #   languageName: "English"
+  #   weight: 2
+  #   menu:
+  #     main:
+  #       - name: Categories
+  #         url: categories
+  #         weight: 5
+  #       - name: Series
+  #         url: series/
+  #         weight: 10
+  #       - name: Search
+  #         url: search
+  #       - name: Rss
+  #         url: index.xml
+  #   homeInfoParams:
+  #     Title: "Ok."
+  #     Content: >
+  #       Give me liberty or give me death.
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.

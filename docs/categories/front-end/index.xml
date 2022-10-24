@@ -60,6 +60,16 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
     
     <item>
       <title>Vue Functional Component</title>
+      <link>https://blog.xuhui.dev/archive/vue-functional-component.en/</link>
+      <pubDate>Mon, 03 Oct 2022 15:55:26 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/archive/vue-functional-component.en/</guid>
+      <description>In Vue3, functional components have been greatly enhanced, and there are two specific performances
+Simplifying the API h available everywhere and slot revision, resulting the wider application Therefore, under Vue3, you can see that the use of functional components has increased a lot. For example, naive-ui. You can find a lot of use of functional components from its documentation. Indeed it&amp;rsquo;s very useful in some cases. But correspondingly, there are some misunderstandings in the use of function components.</description>
+    </item>
+    
+    <item>
+      <title>Vue Functional Component</title>
       <link>https://blog.xuhui.dev/posts/vue-functional-component/</link>
       <pubDate>Mon, 03 Oct 2022 15:55:26 +0800</pubDate>
       

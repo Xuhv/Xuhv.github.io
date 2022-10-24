@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>vue | xuhui</title>
+<title>Archives | xuhui</title>
 <meta name="keywords" content="">
-<meta name="description" content="xuhui&#39;s pages: a web developer.">
+<meta name="description" content="Archives - xuhui">
 <meta name="author" content="xuhui">
-<link rel="canonical" href="https://blog.xuhui.dev/series/vue/">
+<link rel="canonical" href="https://blog.xuhui.dev/archive/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/series/vue/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/archive/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,15 +55,30 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="vue" />
+</noscript><meta property="og:title" content="Archives" />
 <meta property="og:description" content="xuhui&#39;s pages: a web developer." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.xuhui.dev/series/vue/" />
+<meta property="og:url" content="https://blog.xuhui.dev/archive/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="vue"/>
+<meta name="twitter:title" content="Archives"/>
 <meta name="twitter:description" content="xuhui&#39;s pages: a web developer."/>
 
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Archives",
+      "item": "https://blog.xuhui.dev/archive/"
+    }
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -130,9 +145,9 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/series/">Series</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a></div>
   <h1>
-    vue
+    Archives
     <a href="index.xml" title="RSS" aria-label="RSS">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" height="23">
@@ -144,40 +159,7 @@
   </h1>
 </header>
 
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>使用路由分割APP
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>我很烦的一件事就是在某些屎山项目里找代码, 即使编辑器的辅助功能已经非常强大多花不了多少时间, 但真遇到了还是本能得厌恶. 典型的有
-无数个路由写尼玛一个文件里
-一个SFC写上两千行
-整个项目都anyscript, 直接把编辑器跳转功能干废
-这里只针对 1. 提出一个我觉得比较合理的写法: “模块化”, 使用路由分割应用逻辑
-所谓&#34;模块化&#34;, 其实就是把路由表按组分拆到页面去, 比如我的应用有如下的大几十个页面
-系统管理-系统设置 系统管理-在线设置 系统管理-组织设置 项目管理-项目 项目管理-人员 ... 那我们就不应当把他们全平铺在router.ts文件中, 而是针对&#34;系统管理&#34;, “项目管理&#34;等模块, 在其目录下新建一个路由表, 这样查看代码的时候也方便知道那个页面是什么玩意儿, 写在哪的. (什么, 你跟我说你相关逻辑散在views, components各个文件夹? mdzz, 这个话题针对就是你们这种人才.) 似乎计算机组成原理课程上, 有个局部性的概念, 这玩意儿也类似的, 可能要常用的代码, 不应该放近点吗?
-这样写还有个好处就是控制编译出的代码文件, 通过这种方式, 我们可以很轻易地通过每个模块的路由表来控制chunk, 需要代码分割, 异步加载这个路由表呗, 如果你的应用权限是按模块来的, 那直接鉴权都一起做了, 都不需要的话那就直接插到router.ts就好了, 某个页面实在大到咬人, 那就在路由表里把这个页面也给异步加载了呗. 至于为啥不全部异步, 嗯, 当然可以, 如果你愿意.</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-10-04 04:27:23 +0800 CST'>十月 4, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
-  <a class="entry-link" aria-label="post link to 使用路由分割APP" href="https://blog.xuhui.dev/posts/use-router-to-split-app/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Overridable Component Like MUI in Vue
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>在React的组件库MUI中, 有一个看上去就叼到爆的功能OverridableComponent, 在我初学TS那阵子, 那简直就是神迹, 后来对TS逐渐熟悉了看了下源码也就释然了, 再后来一次还尝试写过一个Vue版本.
-本来看懂了原实现, 以为这个移植就是手到擒来, 然而事实上port到Vue还是有点麻烦, 主要问题有
-React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个ComponentTsx也没考虑其他情况, 就刚好这里能用而已 从Vue组件里获取$props类型的这个方式有点诡异, 事实上, 这样获取到的也不止props, 还有事件. 有时候我就在想Vue的这个事件的设计是不是真的失败. 感觉就是增加了一个毫无卵用的API 而且这段代码也就能拿来练练手了, 由于Vue函数组件没状态, 容易搞出性能问题, 状态组件的props需要一个个去定义, 真想实现一个能用的OverridableComponent我还真没办法.</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-10-03 23:38:08 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
-  <a class="entry-link" aria-label="post link to Overridable Component Like MUI in Vue" href="https://blog.xuhui.dev/posts/overridable-component-like-mui-in-vue/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
+<article class="post-entry"> 
   <header class="entry-header">
     <h2>Vue Functional Component
     </h2>
@@ -188,20 +170,6 @@ Simplifying the API h available everywhere and slot revision, resulting the wide
   </div>
   <footer class="entry-footer"><span title='2022-10-03 15:55:26 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;2 分钟&nbsp;·&nbsp;xuhui</footer>
   <a class="entry-link" aria-label="post link to Vue Functional Component" href="https://blog.xuhui.dev/archive/vue-functional-component.en/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Vue Functional Component
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>在Vue3中, 函数组件得到了史诗级加强, 具体表现有二
-写法简化, 使用便利性大大增强 随处可用的h, 插槽改版, 适用范围更加宽广 因此在Vue3下, 可以看到的是函数组件的使用大量增加, 典型的如naive-ui, 从其文档中你能找到大量函数组件的使用, 由此可见, Vue3的函数组件确实在某种意义上有着巨大的好处. 但与之相应的, 函数组件的使用也有着一些误区.
-函数组件的应用场景 重复的模板片段, 在Vue3中, 配合JSX, 重复片段的组件提取将变得异常简单 插槽的封装, 截止本文编写, Vue插槽始终没有好的编辑器支持(指VS Code, 没用过WebStorm), 但通过将插槽封装成Props的方式, 你将得到具有类型支持的组件. 你可以在naive-ui中看到许多这种写法. 毕竟现在插槽就是一个值为函数组件的对象, 封装起来毫无压力 对状态组件的强化, setup script一个很好的地方在于省去了很多的模板代码, 代码短了自然会好读好写一些, 但不好的地方的就是糟糕的TypeScript支持了, 在包含类型的时候volar插件可能会错误解析你的代码, 而#4294这个issue估计是有生之年系列了. 在某些情况下, 你可以考虑使用函数组件来强化你的状态组件. 函数组件的Props并不需要像defineProps那样从类型声明编译, 你可以直接使用各种复杂类型就像是在一般的TS中那样 使用函数组件的注意事项 虽然你可以对组件的插槽按Props的方式封装, 但如果你不是从头开始写一个组件库, 而是在现有组件的基础上操作, 这样的做法可能并不好, 因为你改变了原有的API 当你使用函数组件对状态组件进行包裹的时候, 你需要注意, 状态组件(子组件)的交互应当避免对函数组件(父组件)Props的操作, 函数组件Props更新将造成整个子树的更新, 这可能会导致你的组件卡成PPT 虽然本文拿naive-ui举例, 但我还是觉得element-plus好用</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-10-03 15:55:26 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
-  <a class="entry-link" aria-label="post link to Vue Functional Component" href="https://blog.xuhui.dev/posts/vue-functional-component/"></a>
 </article>
     </main>
     

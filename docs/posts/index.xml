@@ -5,7 +5,23 @@
     <link>https://blog.xuhui.dev/posts/</link>
     <description>Recent content in Posts on xuhui</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 14 Oct 2022 20:49:00 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Oct 2022 22:11:32 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>挂壁之后</title>
+      <link>https://blog.xuhui.dev/posts/after-unemployment/</link>
+      <pubDate>Mon, 24 Oct 2022 22:11:32 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/posts/after-unemployment/</guid>
+      <description>10/24
+挂壁一个多月了，愈发不想工作，但又不得不。
+半个月前试着在BOSS上打了几个招呼，回应者寥寥，有个逼约了面试还放我鸽子，也就关掉了BOSS的通知。说起来，我的技术应该要好过半数以上的人了，但没工作年限背书，连个工作都找不到，属实讽刺。
+但回想起一个多月前的辞职，我依然不后悔，我配不上这家公司，这逼公司也配不上我。
+三月，我就在考虑是不是不再做这行了，可惜的是，我花了两年时间学习计算机学习编程，我舍不得。七月，我再次考虑是不是换一行，但我怕，我已经毕业了。九月，我终于下定决心从这家傻逼公司走人，尽管后面要面临找不到工作的风险。
+我不想转行，与其他人不一样的是，我进入这行只是兴趣使然，从山里走出来，我连电脑都没怎么碰过，当我第一次接触到编程，我迷上了ta, 然后就开始了这扯淡的几年。不知从哪听的，别拿爱好当工作，现在懂了，不是因为会厌倦，而是工作会把你的爱好蘸上屎。
+挂壁一个月，真的是对工作产生了极大的抵触，我现在的情况能找到怎样的工作？拿定额工资的，那收入铁定低于之前，否则就是销售了，妈的智障，我一开始咋不去做销售呢？其实工资低也好，销售也好，我都可以接受，只是几年的努力浪费了，哎。选择比努力重要，遗憾的是，我从未选对过。
+开始找工作了，不找开发了，随缘吧。</description>
+    </item>
+    
     <item>
       <title>Web Component</title>
       <link>https://blog.xuhui.dev/posts/web-component/</link>
@@ -94,9 +110,9 @@ React.ElementType这个类型在Vue中没有等价的东西, 我定义的这个C
 [前端 &amp;amp; 后端] 代码生成, GraphQl和Restful API 能生成的代码尽量让他生成, 谁他妈吃饱了去写那么多代码啊.
 Restful API 后端API编写的时候, Swagger应当注明返回值类型, 使用代码生成工具, 从openapi文档生成出需要到客户端请求代码. 这一条主要方便的是前端, 后端工作量不变(我他妈还真见过swagger没有返回类型的后端, 你会写个几把后端, 至于swagger跟实际对不上的, 我也无fuck说).
 GraphQL 面对各种毫无卵用的查询, 后端和前端都苦不堪言, 那么用GraphQL. 后端定义写好数据源, 后面就可以不用管啦. 前端要啥取啥, GraphQL类型支持大大滴好, 写俩GraphQL文件, 继续生成代码, 谁他妈没事写那么多代码写着玩啊?
-GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便, 用id查询单个对象也用这个, 简单. 而读操作, 特指查一组数据, 各种不胜其烦的查询条件就是从这来的, 用GraphQL.
+GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便. 而读操作, 各种不胜其烦的查询条件就是从这来的, 用GraphQL.
 当然, 这会产生一些问题:
-两种请求混用, 生成的代码中会包含两套类型定义, 不过我觉得问题不大, 可以忽略. 你得写两套异常处理 [前端: Vue] SFC 和 TSX 到了Vue3, TS支持其实已经有很大提升了, 奈何, 模板语法跟TS就是天生不对付, 用着用着你就发现不对劲了. 而TSX呢, 现在Vue3的组件库已经有很多是用TSX写的了, 但到了日常开发, 写业务的时候问题又来了, 几乎所有Vue生态都是围绕SFC来的, 用TSX就放弃了许多, 比如antfu自动引入组件的unplugin插件(当然, 用TSX也必然有收获, 比如clinyong.</description>
+两种请求混用, 生成的代码中会包含两套类型定义, 不过我觉得问题不大, 在后端api设计合理的情况下, 可以忽略. 前端得写两套异常处理 [前端: Vue] SFC 和 TSX 到了Vue3, TS支持其实已经有很大提升了, 奈何, 模板语法跟TS就是天生不对付, 用着用着你就发现不对劲了. 而TSX呢, 现在Vue3的组件库已经有很多是用TSX写的了, 但到了日常开发, 写业务的时候问题又来了, 几乎所有Vue生态都是围绕SFC来的, 用TSX就放弃了许多, 比如antfu自动引入组件的unplugin插件(当然, 用TSX也必然有收获, 比如clinyong.</description>
     </item>
     
     <item>

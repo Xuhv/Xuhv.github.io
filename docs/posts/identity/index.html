@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Identity | xuhui</title>
+<meta name="keywords" content="">
+<meta name="description" content="从JWT开始 我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.
+不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.
+后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.
+AspNet Identity &amp; IdentityServer流弊 当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.
+不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?
+不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom
+OAuth2有四种模式
+Implicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全. Client Credentials Grant, 这玩意不是用在这里的 Password Grant, 狗听了都摇头 Authorization Code Grant, 就它了, 前端几乎无感, 安全性高 然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet.">
+<meta name="author" content="xuhui">
+<link rel="canonical" href="https://blog.xuhui.dev/posts/identity/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5b116175f6edaba9be7332480e930f52ea32527182804eeb47be06497623952e.css" integrity="sha256-WxFhdfbtq6m&#43;czJIDpMPUuoyUnGCgE7rR74GSXYjlS4=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.acb54fd32bbc1982428b8850317e45d076b95012730a5936667e6bc21777692a.js" integrity="sha256-rLVP0yu8GYJCi4hQMX5F0Ha5UBJzClk2Zn5rwhd3aSo="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://blog.xuhui.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://blog.xuhui.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Identity" />
+<meta property="og:description" content="从JWT开始 我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.
+不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.
+后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.
+AspNet Identity &amp; IdentityServer流弊 当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.
+不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?
+不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom
+OAuth2有四种模式
+Implicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全. Client Credentials Grant, 这玩意不是用在这里的 Password Grant, 狗听了都摇头 Authorization Code Grant, 就它了, 前端几乎无感, 安全性高 然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.xuhui.dev/posts/identity/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-06T20:16:40+08:00" />
+<meta property="article:modified_time" content="2022-11-06T20:16:40+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Identity"/>
+<meta name="twitter:description" content="从JWT开始 我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.
+不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.
+后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.
+AspNet Identity &amp; IdentityServer流弊 当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.
+不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?
+不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom
+OAuth2有四种模式
+Implicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全. Client Credentials Grant, 这玩意不是用在这里的 Password Grant, 狗听了都摇头 Authorization Code Grant, 就它了, 前端几乎无感, 安全性高 然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://blog.xuhui.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Identity",
+      "item": "https://blog.xuhui.dev/posts/identity/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Identity",
+  "name": "Identity",
+  "description": "从JWT开始 我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.\n不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.\n后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.\nAspNet Identity \u0026amp; IdentityServer流弊 当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.\n不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?\n不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom\nOAuth2有四种模式\nImplicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全. Client Credentials Grant, 这玩意不是用在这里的 Password Grant, 狗听了都摇头 Authorization Code Grant, 就它了, 前端几乎无感, 安全性高 然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet.",
+  "keywords": [
+    
+  ],
+  "articleBody": "从JWT开始 我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.\n不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.\n后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.\nAspNet Identity \u0026 IdentityServer流弊 当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.\n不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?\n不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom\nOAuth2有四种模式\nImplicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全. Client Credentials Grant, 这玩意不是用在这里的 Password Grant, 狗听了都摇头 Authorization Code Grant, 就它了, 前端几乎无感, 安全性高 然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet.Yarp把前端代理到了后端, 这下总没事了吧, 好家伙, 404, Backend Channel重定向这一步直接炸了, 测试下重定向链接Post请求404, Get被重写到了index.html, 合着这波重定向把我客户端上几个给Backend Channel用的接口干废了. 虽然IdentityServer还有个BFF的库可以解决这个问题, 但说句实话, 已经给恶心到了, 引入额外的东西太多了.\n",
+  "wordCount" : "95",
+  "inLanguage": "zh",
+  "datePublished": "2022-11-06T20:16:40+08:00",
+  "dateModified": "2022-11-06T20:16:40+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "xuhui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://blog.xuhui.dev/posts/identity/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "xuhui",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://blog.xuhui.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://blog.xuhui.dev/" accesskey="h" title="xuhui (Alt + H)">xuhui</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://blog.xuhui.dev/categories" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/series/" title="专栏">
+                    <span>专栏</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/index.xml" title="Rss">
+                    <span>Rss</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://blog.xuhui.dev/search" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Identity
+    </h1>
+    <div class="post-meta"><span title='2022-11-06 20:16:40 +0800 CST'>十一月 6, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">目录</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%bb%8ejwt%e5%bc%80%e5%a7%8b" aria-label="从JWT开始">从JWT开始</a></li>
+                <li>
+                    <a href="#aspnet-identity--identityserver%e6%b5%81%e5%bc%8a" aria-label="AspNet Identity &amp;amp; IdentityServer流弊">AspNet Identity &amp; IdentityServer流弊</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h3 id="从jwt开始">从JWT开始<a hidden class="anchor" aria-hidden="true" href="#从jwt开始">#</a></h3>
+<p>我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.</p>
+<p>不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.</p>
+<p>后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.</p>
+<h3 id="aspnet-identity--identityserver流弊">AspNet Identity &amp; IdentityServer流弊<a hidden class="anchor" aria-hidden="true" href="#aspnet-identity--identityserver流弊">#</a></h3>
+<p>当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.</p>
+<p>不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?</p>
+<p>不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom</p>
+<p>OAuth2有四种模式</p>
+<ol>
+<li>Implicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全.</li>
+<li>Client Credentials Grant, 这玩意不是用在这里的</li>
+<li>Password Grant, 狗听了都摇头</li>
+<li>Authorization Code Grant, 就它了, 前端几乎无感, 安全性高</li>
+</ol>
+<p>然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet.Yarp把前端代理到了后端, 这下总没事了吧, 好家伙, 404, Backend Channel重定向这一步直接炸了, 测试下重定向链接Post请求404, Get被重写到了index.html, 合着这波重定向把我客户端上几个给Backend Channel用的接口干废了. 虽然IdentityServer还有个BFF的库可以解决这个问题, 但说句实话, 已经给恶心到了, 引入额外的东西太多了.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://blog.xuhui.dev/posts/postgres-with-orm/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>Postgres With Orm</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://blog.xuhui.dev/">xuhui</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    <span>View<span id="busuanzi_value_site_pv"></span>times</span>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

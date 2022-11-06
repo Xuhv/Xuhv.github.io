@@ -3,7 +3,7 @@ title: "使用路由分割APP"
 date: 2022-10-04T04:27:23+08:00
 showToc: true
 categories:
-  - front-end
+  - frontend
 series:
   - vue
 ---

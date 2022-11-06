@@ -5,21 +5,36 @@
     <link>https://blog.xuhui.dev/categories/false/</link>
     <description>Recent content in false on xuhui</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 Oct 2022 22:11:32 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/false/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 20:16:40 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/false/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>挂壁之后</title>
-      <link>https://blog.xuhui.dev/posts/after-unemployment/</link>
-      <pubDate>Mon, 24 Oct 2022 22:11:32 +0800</pubDate>
+      <title>Identity</title>
+      <link>https://blog.xuhui.dev/posts/identity/</link>
+      <pubDate>Sun, 06 Nov 2022 20:16:40 +0800</pubDate>
       
-      <guid>https://blog.xuhui.dev/posts/after-unemployment/</guid>
-      <description>10/24
-挂壁一个多月了，愈发不想工作，但又不得不。
-半个月前试着在BOSS上打了几个招呼，回应者寥寥，有个逼约了面试还放我鸽子，也就关掉了BOSS的通知。说起来，我的技术应该要好过半数以上的人了，但没工作年限背书，连个工作都找不到，属实讽刺。
-但回想起一个多月前的辞职，我依然不后悔，我配不上这家公司，这逼公司也配不上我。
-三月，我就在考虑是不是不再做这行了，可惜的是，我花了两年时间学习计算机学习编程，我舍不得。七月，我再次考虑是不是换一行，但我怕，我已经毕业了。九月，我终于下定决心从这家傻逼公司走人，尽管后面要面临找不到工作的风险。
-我不想转行，与其他人不一样的是，我进入这行只是兴趣使然，从山里走出来，我连电脑都没怎么碰过，当我第一次接触到编程，我迷上了ta, 然后就开始了这扯淡的几年。不知从哪听的，别拿爱好当工作，现在懂了，不是因为会厌倦，而是工作会把你的爱好蘸上屎。
-挂壁一个月，真的是对工作产生了极大的抵触，我现在的情况能找到怎样的工作？拿定额工资的，那收入铁定低于之前，否则就是销售了，妈的智障，我一开始咋不去做销售呢？其实工资低也好，销售也好，我都可以接受，只是几年的努力浪费了，哎。选择比努力重要，遗憾的是，我从未选对过。
-开始找工作了，不找开发了，随缘吧。</description>
+      <guid>https://blog.xuhui.dev/posts/identity/</guid>
+      <description>从JWT开始 我对乱七八糟登录认证的认知是从JWT开始的, 无状态, 听到这一条我就知道我离不开他了, 不是别的, 我SQL写得比较拉跨, 毕竟前端选手, 后端属实业余, 吹牛逼还, 行写SQL直接就现原形了.
+不过后来我发现好像这个无状态好像也不差绝对的, 登录不还得有登出吗, 登录不设白名单, 登出的时候就得设个黑名单.
+后来就觉得跟普通的session_id方案差不多了, 加个公用的数据库, session_id照样跨系统用. 而JWT这玩意配置起来也比较麻烦, 在ASP.NET Core中, 生成JWT和利用JWT进行认证授权是要分开写两套的, 麻烦, 不给我网, 我连那两个包名都记不住.
+AspNet Identity &amp;amp; IdentityServer流弊 当我发现这东西以后, 我才知道自己写登录是多离谱的事, 尼玛别人连登陆页面和数据库都给你写好了, 拓展也是无压力. 只是我发现浏览器是把信息存在cookie里的, 当时心里就感觉有些不妙.
+不过如果是要微服务, 单做一个登陆服务, Identity就不行了, 然后微软网站告诉我有个东西叫IdentityServer, 开箱即用的OIDC和Identity集成, 这等于说用.NET技术栈的话压根就不用愁认证方面的问题了?
+不过很快我发现我错了, 前后端分离, 这是我学习的一个宗旨, 虽然MVC,Razor Pages以及Blazor Server我也简单过了一遍, 但没有前后端分离是肯定不行的, 认证服务器,资源服务器谈不上啥分离不分离, 要分离的就是使用资源的客户端, 终端用户使用的应用, 然后, Boom
+OAuth2有四种模式
+Implicit Grant我手动pass, 属实不想再前端整这些玩意儿, 前端应当具有更强的表现力和更优的交互, 而不是操心这些, 而且token存浏览器本身就不是百分百安全. Client Credentials Grant, 这玩意不是用在这里的 Password Grant, 狗听了都摇头 Authorization Code Grant, 就它了, 前端几乎无感, 安全性高 然后, 出岔子了, 开发时, 前端和后端并不是同一个HOST, 于是Backend Channel在重定向的时候是定到后端的, 而我是将后端代理到前端, 于是跨域了, 嗯, 于是我用AspNet.</description>
+    </item>
+    
+    <item>
+      <title>极致的开发效率</title>
+      <link>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</link>
+      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</guid>
+      <description>只是瞎扯下我认为的极致开发效率, 能提升效率的前提是前端使用TS, 连TS都没有谈个蛋效率
+[后端 &amp;amp; 前端] 登录认证 这玩意还是得用现成的方案, 尤其涉及到多系统统一登陆SSO的时候, 自己造轮子简直脑子有屎, 在上家公司有幸见这群蛇皮造过一次, 说实话, 没有金刚钻就别揽瓷器活.
+但现有的一个问题是, 现在开发的时候动则前后端分离, 说实话给认证授权带来了不小麻烦, 比如OIDC令牌流, 这他妈frontend channel跟backend channel一分开, 开发时跨域跨站挣得我脑瓜子嗡嗡的. 又比如Blazor Server, 此前我觉得这个服务器渲染方案几乎完美了, 然后猛地发现: 卧槽, signalR, HttpContext拿不到的干活. 于是, 当这些情况下我们必须引入额外的配置是甚至是依赖来解决这些新生的问题, 但相比瞎几把写认证系统, 稳妥, 方便到不知哪去了.
+[前端 &amp;amp; 后端] 代码生成, GraphQl和Restful API 能生成的代码尽量让他生成, 谁他妈吃饱了去写那么多代码啊.
+Restful API 后端API编写的时候, Swagger应当注明返回值类型, 使用代码生成工具, 从openapi文档生成出需要到客户端请求代码. 这一条主要方便的是前端, 后端工作量不变(我他妈还真见过swagger没有返回类型的后端, 你会写个几把后端, 至于swagger跟实际对不上的, 我也无fuck说).
+GraphQL 面对各种毫无卵用的查询, 后端和前端都苦不堪言, 那么用GraphQL. 后端定义写好数据源, 后面就可以不用管啦. 前端要啥取啥, GraphQL类型支持大大滴好, 写俩GraphQL文件, 继续生成代码, 谁他妈没事写那么多代码写着玩啊?
+GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便.</description>
     </item>
     
     <item>
@@ -46,21 +61,6 @@
 似乎哪个群的网友分享的一个抖音视频点醒了我. 也不记得视频是讲什么的了, 大概率是某个衣着暴露/猎奇的的女的扭来扭去吧, 他们总爱看这些(我不是, 我没有!). 看到最后, 一个很有穿透力的声音配着logo就出来了: 抖音! 嗯, 我记得之前我手机里还有抖音的时候, 好像是&amp;quot;抖音, 记录美好生活&amp;quot;来着.
 是了, 当我这次开始写博文的时候, 我终于想通了, 是记录. 是记录而不是分享, 那些沉没在数据库中的内容或许有很多都是如此, 生活可能并不美好, 就像某些平台上的技术文章其实毫无技术含量. 但对于经历者, 这还是有意义的, 生活需要仪式感, 于是他们记录下生活, 学习需要正反馈, 那么便将其记录下来吧, 或许在别人眼中不值一提, 但也真真切切是自己所经历过的. 随便打开个博文网站, 里面大部分的内容是重复又简单的, 但想起来, 自己也曾学过这些, 但回头看去, 却仿佛自己什么也没留下, 就像我二十年的生活也没留下什么记忆一样, 或许我也该记录一下.
 至于有没有人看? 去他妈的, 一味追求流量的那叫营销号.</description>
-    </item>
-    
-    <item>
-      <title>极致的开发效率</title>
-      <link>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</link>
-      <pubDate>Mon, 03 Oct 2022 20:22:00 +0800</pubDate>
-      
-      <guid>https://blog.xuhui.dev/posts/ultimate-development-efficiency/</guid>
-      <description>只是瞎扯下我认为的极致开发效率, 能提升效率的前提是前端使用TS, 连TS都没有谈个蛋效率
-[前端 &amp;amp; 后端] 代码生成, GraphQl和Restful API 能生成的代码尽量让他生成, 谁他妈吃饱了去写那么多代码啊.
-Restful API 后端API编写的时候, Swagger应当注明返回值类型, 使用代码生成工具, 从openapi文档生成出需要到客户端请求代码. 这一条主要方便的是前端, 后端工作量不变(我他妈还真见过swagger没有返回类型的后端, 你会写个几把后端, 至于swagger跟实际对不上的, 我也无fuck说).
-GraphQL 面对各种毫无卵用的查询, 后端和前端都苦不堪言, 那么用GraphQL. 后端定义写好数据源, 后面就可以不用管啦. 前端要啥取啥, GraphQL类型支持大大滴好, 写俩GraphQL文件, 继续生成代码, 谁他妈没事写那么多代码写着玩啊?
-GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便. 而读操作, 各种不胜其烦的查询条件就是从这来的, 用GraphQL.
-当然, 这会产生一些问题:
-两种请求混用, 生成的代码中会包含两套类型定义, 不过我觉得问题不大, 在后端api设计合理的情况下, 可以忽略. 前端得写两套异常处理 [前端: Vue] SFC 和 TSX 到了Vue3, TS支持其实已经有很大提升了, 奈何, 模板语法跟TS就是天生不对付, 用着用着你就发现不对劲了. 而TSX呢, 现在Vue3的组件库已经有很多是用TSX写的了, 但到了日常开发, 写业务的时候问题又来了, 几乎所有Vue生态都是围绕SFC来的, 用TSX就放弃了许多, 比如antfu自动引入组件的unplugin插件(当然, 用TSX也必然有收获, 比如clinyong.</description>
     </item>
     
   </channel>

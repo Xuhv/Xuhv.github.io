@@ -5,22 +5,31 @@
     <link>https://blog.xuhui.dev/categories/</link>
     <description>Recent content in Categories on xuhui</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 Oct 2022 22:11:32 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 20:16:40 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>false</title>
       <link>https://blog.xuhui.dev/categories/false/</link>
-      <pubDate>Mon, 24 Oct 2022 22:11:32 +0800</pubDate>
+      <pubDate>Sun, 06 Nov 2022 20:16:40 +0800</pubDate>
       
       <guid>https://blog.xuhui.dev/categories/false/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>front-end</title>
-      <link>https://blog.xuhui.dev/categories/front-end/</link>
+      <title>backend</title>
+      <link>https://blog.xuhui.dev/categories/backend/</link>
+      <pubDate>Sun, 06 Nov 2022 19:57:00 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/categories/backend/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>frontend</title>
+      <link>https://blog.xuhui.dev/categories/frontend/</link>
       <pubDate>Fri, 14 Oct 2022 20:49:00 +0800</pubDate>
       
-      <guid>https://blog.xuhui.dev/categories/front-end/</guid>
+      <guid>https://blog.xuhui.dev/categories/frontend/</guid>
       <description></description>
     </item>
     

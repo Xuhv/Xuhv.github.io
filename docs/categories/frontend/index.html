@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>vue | xuhui</title>
+<title>frontend | xuhui</title>
 <meta name="keywords" content="">
 <meta name="description" content="xuhui&#39;s pages: a web developer.">
 <meta name="author" content="xuhui">
-<link rel="canonical" href="https://blog.xuhui.dev/series/vue/">
+<link rel="canonical" href="https://blog.xuhui.dev/categories/frontend/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.5b116175f6edaba9be7332480e930f52ea32527182804eeb47be06497623952e.css" integrity="sha256-WxFhdfbtq6m&#43;czJIDpMPUuoyUnGCgE7rR74GSXYjlS4=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://blog.xuhui.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/series/vue/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://blog.xuhui.dev/categories/frontend/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,13 +55,13 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="vue" />
+</noscript><meta property="og:title" content="frontend" />
 <meta property="og:description" content="xuhui&#39;s pages: a web developer." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://blog.xuhui.dev/series/vue/" />
+<meta property="og:url" content="https://blog.xuhui.dev/categories/frontend/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="vue"/>
+<meta name="twitter:title" content="frontend"/>
 <meta name="twitter:description" content="xuhui&#39;s pages: a web developer."/>
 
 </head>
@@ -130,9 +130,9 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/series/">Series</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="https://blog.xuhui.dev/">主页</a>&nbsp;»&nbsp;<a href="https://blog.xuhui.dev/categories/">Categories</a></div>
   <h1>
-    vue
+    frontend
     <a href="index.xml" title="RSS" aria-label="RSS">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" height="23">
@@ -143,6 +143,37 @@
     </a>
   </h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Web Component
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>琢磨了下Web Component, 感觉就是还不太好用
+跟现有的视图库相比，自定义元素并不方便，一些构建web components的库对其进行了封装，然而封装后的api又对不齐了，到头来还是距离原生开发有距离
+这一点也不知道是该说好还是不好，web component这边对于事件并没有额外的关心，你就按照Web API去做就是了，假如说需要封装一个自己的input，那么在输入的时候就自行dispatchEvent(new InputEvent(&#39;input&#39;, {...}))也就行了，然而问题是，习惯了vue、react的我们怎么可能还这么写，甚至可能都不知道还有这API。。vue的事件似乎更好用一些，react直接传回调更是神之设计。不过问题倒也不大，熟悉下原来不常用的API, 就跟写原生js一样。
+这个应该最容易发现，我们在用现有的视图库时，props管他啥类型，直接塞到模板/JSX上，但在html里，嗯，老实用字符串吧，复杂数据还得用js去设置。
+样式的问题，现在的编辑器，直接在ts/js文件里用字符串写css没提示啊，单独起一个文件吧，还得过一道编译，麻烦。
+编辑器对自定义元素的支持拉胯，虽然几年前vscode就已经支持了custom data，但在我不长的体验时间里失灵有点频繁。</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-14 20:49:00 +0800 CST'>十月 14, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to Web Component" href="https://blog.xuhui.dev/posts/web-component/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>关于深拷贝
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>原来遇到要深拷贝这种操作我一般就JSON.stingify然后JSON.parse了(为啥不用lodash呢, 我也没个很好的理由, 可能是看见项目package.json里没这个包也不好自己加得?)
+后来lodash就真香了, 但某次看着引入的函数, 我就在想这种递归的方式比用JSON好在哪里, 函数没了? 我只是用来拷贝数据, 不存在这个问题啊; 循环依赖, 什么大聪明非得干出循环依赖的数据来? 至于别的, 等等, JSON和JS对象差别在哪? JS对象的类型定义应该是Record&lt;string | number | Symbol, any&gt;, 嗯Symbol类型肯定是炸了, 不过谁数据里要这玩意儿啊, 再想想别的. 嗯, JSON就对象, 数组, 字符串, 数字, 布尔和null几种类型, 但JS常用的还有undefined, Date也用来表示数据, undefined我知道, 序列化后就没得咯, 很棒的特性, 表单置空用这个就不会发额外字段到后端了, Date呢, 试了下, 会变成ISO格式的字符串, 原来如此. 另外一搜索, 发现还有NaN, Infinity, -Infinity也会被序列化成null.
+另外前阵子出了个structuredClone的API, 用这个的话更好, lodash可删(防抖节流? 嗯, 先继续用着吧, 正经人谁手写这玩意儿啊). 一看兼容性, 好家伙Chrome 98, Firefox 94, Node.Js 17, 这谁顶得住, 但这个see also就很妙了, 对啊, 这玩意api虽然有些许不同, 但不还是个深拷贝吗, polyfill下就得了, cloneDeep可删.</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-10-05 00:39:52 +0800 CST'>十月 5, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <a class="entry-link" aria-label="post link to 关于深拷贝" href="https://blog.xuhui.dev/posts/about-deepcopy/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">

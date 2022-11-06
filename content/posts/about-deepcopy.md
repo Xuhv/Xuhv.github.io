@@ -3,7 +3,7 @@ title: "关于深拷贝"
 date: 2022-10-05T00:39:52+08:00
 showToc: true
 categories: 
-  - front-end
+  - frontend
 series: no
 ---
 

@@ -3,7 +3,7 @@ title: "Overridable Component Like MUI in Vue"
 date: 2022-10-03T23:38:08+08:00
 showToc: true
 categories:
-  - front-end
+  - frontend
 series:
   - typescript
   - vue

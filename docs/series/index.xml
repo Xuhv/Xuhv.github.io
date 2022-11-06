@@ -5,22 +5,31 @@
     <link>https://blog.xuhui.dev/series/</link>
     <description>Recent content in Series on xuhui</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 Oct 2022 22:11:32 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/series/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 06 Nov 2022 20:16:40 +0800</lastBuildDate><atom:link href="https://blog.xuhui.dev/series/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>心路历程</title>
-      <link>https://blog.xuhui.dev/series/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</link>
-      <pubDate>Mon, 24 Oct 2022 22:11:32 +0800</pubDate>
+      <title>false</title>
+      <link>https://blog.xuhui.dev/series/false/</link>
+      <pubDate>Sun, 06 Nov 2022 20:16:40 +0800</pubDate>
       
-      <guid>https://blog.xuhui.dev/series/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</guid>
+      <guid>https://blog.xuhui.dev/series/false/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>false</title>
-      <link>https://blog.xuhui.dev/series/false/</link>
-      <pubDate>Fri, 14 Oct 2022 20:49:00 +0800</pubDate>
+      <title>Development Efficiency</title>
+      <link>https://blog.xuhui.dev/series/development-efficiency/</link>
+      <pubDate>Sun, 06 Nov 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.xuhui.dev/series/false/</guid>
+      <guid>https://blog.xuhui.dev/series/development-efficiency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>心路历程</title>
+      <link>https://blog.xuhui.dev/series/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</link>
+      <pubDate>Wed, 05 Oct 2022 09:50:11 +0800</pubDate>
+      
+      <guid>https://blog.xuhui.dev/series/%E5%BF%83%E8%B7%AF%E5%8E%86%E7%A8%8B/</guid>
       <description></description>
     </item>
     
@@ -39,15 +48,6 @@
       <pubDate>Mon, 03 Oct 2022 23:38:08 +0800</pubDate>
       
       <guid>https://blog.xuhui.dev/series/typescript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Development Efficiency</title>
-      <link>https://blog.xuhui.dev/series/development-efficiency/</link>
-      <pubDate>Mon, 03 Oct 2022 20:22:00 +0800</pubDate>
-      
-      <guid>https://blog.xuhui.dev/series/development-efficiency/</guid>
       <description></description>
     </item>
     

@@ -2,7 +2,7 @@
 title: "Web Component"
 date: 2022-10-14T20:49:00+08:00
 categories: 
-  - front-end
+  - frontend
 series: no
 ---
 

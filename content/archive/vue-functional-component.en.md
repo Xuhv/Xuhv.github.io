@@ -3,7 +3,7 @@ title: "Vue Functional Component"
 date: 2022-10-03T15:55:26+08:00
 showToc: true
 categories:
-  - front-end
+  - frontend
 series: 
   - vue
 ---

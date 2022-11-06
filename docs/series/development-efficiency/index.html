@@ -10,7 +10,7 @@
 <meta name="description" content="xuhui&#39;s pages: a web developer.">
 <meta name="author" content="xuhui">
 <link rel="canonical" href="https://blog.xuhui.dev/series/development-efficiency/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.af94436b6b7f014090c8ba4bb0f636854232407cdf19ee6105642567e42b0e39.css" integrity="sha256-r5RDa2t/AUCQyLpLsPY2hUIyQHzfGe5hBWQlZ&#43;QrDjk=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.5b116175f6edaba9be7332480e930f52ea32527182804eeb47be06497623952e.css" integrity="sha256-WxFhdfbtq6m&#43;czJIDpMPUuoyUnGCgE7rR74GSXYjlS4=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://blog.xuhui.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://blog.xuhui.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://blog.xuhui.dev/favicon-32x32.png">
@@ -151,14 +151,14 @@
   </header>
   <div class="entry-content">
     <p>只是瞎扯下我认为的极致开发效率, 能提升效率的前提是前端使用TS, 连TS都没有谈个蛋效率
+[后端 &amp; 前端] 登录认证 这玩意还是得用现成的方案, 尤其涉及到多系统统一登陆SSO的时候, 自己造轮子简直脑子有屎, 在上家公司有幸见这群蛇皮造过一次, 说实话, 没有金刚钻就别揽瓷器活.
+但现有的一个问题是, 现在开发的时候动则前后端分离, 说实话给认证授权带来了不小麻烦, 比如OIDC令牌流, 这他妈frontend channel跟backend channel一分开, 开发时跨域跨站挣得我脑瓜子嗡嗡的. 又比如Blazor Server, 此前我觉得这个服务器渲染方案几乎完美了, 然后猛地发现: 卧槽, signalR, HttpContext拿不到的干活. 于是, 当这些情况下我们必须引入额外的配置是甚至是依赖来解决这些新生的问题, 但相比瞎几把写认证系统, 稳妥, 方便到不知哪去了.
 [前端 &amp; 后端] 代码生成, GraphQl和Restful API 能生成的代码尽量让他生成, 谁他妈吃饱了去写那么多代码啊.
 Restful API 后端API编写的时候, Swagger应当注明返回值类型, 使用代码生成工具, 从openapi文档生成出需要到客户端请求代码. 这一条主要方便的是前端, 后端工作量不变(我他妈还真见过swagger没有返回类型的后端, 你会写个几把后端, 至于swagger跟实际对不上的, 我也无fuck说).
 GraphQL 面对各种毫无卵用的查询, 后端和前端都苦不堪言, 那么用GraphQL. 后端定义写好数据源, 后面就可以不用管啦. 前端要啥取啥, GraphQL类型支持大大滴好, 写俩GraphQL文件, 继续生成代码, 谁他妈没事写那么多代码写着玩啊?
-GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便. 而读操作, 各种不胜其烦的查询条件就是从这来的, 用GraphQL.
-当然, 这会产生一些问题:
-两种请求混用, 生成的代码中会包含两套类型定义, 不过我觉得问题不大, 在后端api设计合理的情况下, 可以忽略. 前端得写两套异常处理 [前端: Vue] SFC 和 TSX 到了Vue3, TS支持其实已经有很大提升了, 奈何, 模板语法跟TS就是天生不对付, 用着用着你就发现不对劲了. 而TSX呢, 现在Vue3的组件库已经有很多是用TSX写的了, 但到了日常开发, 写业务的时候问题又来了, 几乎所有Vue生态都是围绕SFC来的, 用TSX就放弃了许多, 比如antfu自动引入组件的unplugin插件(当然, 用TSX也必然有收获, 比如clinyong....</p>
+GraphQl和Restful API混用 Restful API一个好处是自由, 与其他内容集成也好操作, 好改动, 我觉着写操作和敏感一些的操作都通过一般的控制器来写就行了, 记录日志, 添加各种离谱操作也方便....</p>
   </div>
-  <footer class="entry-footer"><span title='2022-10-03 20:22:00 +0800 CST'>十月 3, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
+  <footer class="entry-footer"><span title='2022-11-06 00:00:00 +0000 UTC'>十一月 6, 2022</span>&nbsp;·&nbsp;1 分钟&nbsp;·&nbsp;xuhui</footer>
   <a class="entry-link" aria-label="post link to 极致的开发效率" href="https://blog.xuhui.dev/posts/ultimate-development-efficiency/"></a>
 </article>
     </main>
